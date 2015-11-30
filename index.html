@@ -1,213 +1,113 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Cobweb bruto</title>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.96/jsxgraphcore.js"></script>
+        <title>Iteradas</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.96/jsxgraphcore.js"></script>
     </head>
     <body>
-        <div id="Botoes">
-            <input id="A1" value="0.7637">X1
-            <input id="A2" value="4">a
-            <input id="Play" type="button" value="Play" onclick="play()"/>
-            <input type="reset" value="Reset">
+        
+        <div id="parte1">
+            <input id="Valor1" value="0.9876">A1<br>
+            <input id="Valor2" value="0.987654">B1<br>
+            <input id="Play" value="Play" type="button" onclick="play()">
         </div>
-        <div id='jxgbox' class='jxgbox' style='width:600px; height:600px;'></div>
+        <div id='jxgbox' class='jxgbox' style='width:1000px; height:1000px;'></div>
         <script>
             
             var graph1;
-            var brd = JXG.JSXGraph.initBoard('jxgbox', { boundingbox: [-0.1, 1.05, 1.05, -0.1], axis: true });
-            var i, x1, y1, x2, y2, x3, y3;
+            var brd = JXG.JSXGraph.initBoard('jxgbox', { boundingbox: [-1, 1.05, 105, 0], axis: true });
+            
+            var i, x1, y1;
+            y1 = h;
             var p;
             var points = [];
-            var X1 = [];//guarda os valores de x da parabola
-            var Y1 = [];//guardo os valores de y da parabola
-            var X2 = [];//guarda os valores de x da reta
-            var Y2 = [];//guarda os valores de y da reta
-            var X3;//guarda os valores de x do cobweb
-            var Y3;//guarda os valores de y do cobweb
+            var x = [];
+            var y = [];
             var start = 0;
-            var end = 1;
-            var h = document.getElementById('A2').value;
-            var u;
-            
-            grafParabola(); 
-            grafReta();
-            
+            var end = 100;
+            i = 0;
             
             function play(){
+                
                 JXG.JSXGraph.freeBoard(brd);
-                brd = JXG.JSXGraph.initBoard('jxgbox', { boundingbox: [-0.1, 1.05, 1.05, -0.1], axis: true });
+                brd = JXG.JSXGraph.initBoard('jxgbox', { boundingbox: [-1, 1.05, 105, 0], axis: true });
                 
-                h = document.getElementById('A2').value;
-                X3 = [];Y3 = [];Y2 = [];X2 = [];Y1 = [];X1 = [];
+                var a1 = document.getElementById("Valor1").value;
+                var b1 = document.getElementById("Valor2").value;
+                iterada(a1, '#0000ff', b1, '#ff0000');
+                //var b1 = document.getElementById("Valor2").value;
+                //iterada(b1, '#ff0000');                
                 
-                grafParabola();
-                grafReta();                
-                var a = document.getElementById('A1').value;
-                x3 = a;
-                y3 = 0;
-                
-                p = brd.createElement('point', [x3, y3],
-                    {
-                        strokeWidth: 2, strokeColor: '#ffffff',
-                        highlightStrokeColor: '#ff0000', fillColor: '#ff0000',
-                        highlightFillColor: '#ff0000', style: '6', name: '', fixed: true,
-                        visible: false
-                    }
-                );
-        
-                points.push(p);
-                X3.push(x3);
-                Y3.push(y3);
-                
-                var j = 0;
-                u = 0;
+            }
+            
+            function iterada(h,f,g,k){
+                var i, x1, y1, y2;
+               // y1 = h;
+                //p;
+                points = [];
+                x = [];
+                y = [];
+                X2 = [];
+                Y2 = [];
+                //start = 0;
+                //end = 100;
+                i = 0;
+                y1 = h;
+                y2 = g;
+                x1 = 0;
                 var t = setInterval(function(){
                     
-                    PontoCobweb();
-                    Desenha();
-                    //y3 = parabola();
-                    //PontoCobweb();
-                    //Desenha();
-                    //x3 = reta();
-                    u++;
-                    j++;
-                    if(j>100){clearInterval(t);}
                     
-                },50);
-                               
-            }
-            
-            function Desenha(){
-                
-                brd.createElement('curve', [X3, Y3],
-                    {
-                        strokeWidth: 3, strokeColor: '#ff0000',
-                        highlightStrokeColor: '#ff0000'
-                    }
-                );
-                
-                return;
-                
-            }
-            
-            
-            function reta(){
-                var b = y3;
-                
-                return b;
-            }
-            
-            function parabola(){
-                var c = h*x3*(1 - x3);
-                
-                return c;
-            }
-            
-            function PontoCobweb(){
-                
-                if(u%2 === 0){y3 = parabola();}
-                else{x3 = reta();}
-               
-                
-                p = brd.createElement('point', [x3, y3],
-                    {
-                        strokeWidth: 2, strokeColor: '#ffffff',
-                        highlightStrokeColor: '#ff0000', fillColor: '#ff0000',
-                        highlightFillColor: '#ff0000', style: '6', name: '', fixed: true,
-                        visible: false
-                    }
-                );
-                
-                points.push(p);
-                X3.push(x3);
-                Y3.push(y3);
-        
-                return ;
-                
-            }
-            
-            
-            
-            function grafParabola(){
-                
-                i = 0;
-                points.push(brd.createElement('point', [start, 0], { visible: false, name: '', fixed: true })); //cria o ponto inicial
-                
-                while (i <= end){
+                    if(x1 === 0){ y1 = h; y2 = g;}
+                    else{y1 = 4*y1*(1 - y1); y2 = 4*y2*(1 - y2);}
                     
-                    x1 = i;
-                    y1 = h*x1*(1-x1);
-                    
-                    //Cria o ponto p = (x1;y1) com essas caracteristicas
-                    p = brd.createElement('point',[x1, y1],
+                    p = brd.createElement('point', [x1, y1], 
+                        
                         {
                             strokeWidth: 2, strokeColor: '#ffffff',
-                            highlightStrokeColor: '#0000ff', fillColor: '#0000ff',
-                            highlightFillColor: '#0000ff', style: '6', name:'', fixed: true,
-                            visible: false
+                            highlightStrokeColor: f, fillColor: f,
+                            highlighFillColor: f, style: 6, name: "", fixed: true
                         }
                     );
-                    
-                    points.push(p);     //adciona o ponto p no vetor ponto
-                    X1.push(x1);        //adciona a componente x1 no vetor X1
-                    Y1.push(y1);        //adciona a componente y1 no vetor Y1
-                    i = i + 0.001;
-                    
-                }
-                
-                //liga os pontos dos vetores (X1;Y1) com essas caracteristicas
-                brd.createElement('curve', [X1, Y1],
-                        {
-                            strokeWidth: 3, strokeColor: '#0000ff',
-                            highlightStrokeColor: '#0000ff'
-                        }
-                );
-                
-            }
             
-            function grafReta(){
-                
-                i = 0;
-                points.push(brd.createElement('point', [start, 0], { visible: false, name: '', fixed: true }));
-                
-                while(i <= 1){
-                    
-                    x2 = i;
-                    y2 = i;
-                    
-                    p = brd.createElement('point', [x2, y2],
+                    points.push(p);
+                    x.push(x1);
+                    y.push(y1);
+            
+                    p = brd.createElement('point', [x1, y2], 
+                        
                         {
                             strokeWidth: 2, strokeColor: '#ffffff',
-                            highlightStrokeColor: '#00ff00', fillColor: '#00ff00',
-                            highlightFillColor: '#00ff00', style: '6', name: '', fixed: true,
-                            visible: false
+                            highlightStrokeColor: k, fillColor: k,
+                            highlighFillColor: k, style: 6, name: "", fixed: true
                         }
                     );
                     
                     points.push(p);
-                    X2.push(x2);
+                    X2.push(x1);
                     Y2.push(y2);
-                    i = i + 1;                    
-                               
-                }
+                    
+                    brd.createElement('curve', [x, y],
+                    {
+                        strokeWidth: 3, strokeColor: f,
+                        highlightStrokeColor: f
+                    }
+                );
+        
+                    brd.createElement('curve', [X2, Y2],
+                    {
+                        strokeWidth: 3, strokeColor: k,
+                        highlightStrokeColor: k
+                    }
+                );
+        
+                    if(x1>100){clearInterval(t);}
+                    x1++;
+                },100);
                 
-                brd.createElement('curve', [X2, Y2],
-                        {
-                            strokeWidth: 3, strokeColor: '#00ff00',
-                            highlightStrokeColor: '#00ff00'
-                        }
-                    );
-            
             }
-            
-            //function sleep(){
-              //  setTimeout(function(){return;},800);
-                //sleep();
-            //}
-            
             
         </script>
     </body>
