@@ -1,0 +1,15 @@
+body{
+    background-color: #add8e6
+}
+#Header h1{
+    color:green
+}
+#Header p{
+    color:yellow
+}
+#menu {
+	position: absolute;
+	top:150px;
+	left:50%;
+	margin-left:-254px;
+}
