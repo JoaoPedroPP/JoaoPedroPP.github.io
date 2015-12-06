@@ -7,19 +7,25 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.96/jsxgraphcore.js"></script>
     </head>
     <body>
-        
+        <div id="Titulo" style=" position: relative; margin-left: 450px">
+	    <h1> Sensibilidade no mapa logistico</h1>
+	</div>
+	<div id="Formula" style=" position: relative; margin-left: 590px">
+	    <h3>Xn+1 = 4Xn(1 - Xn)</h3>
+	</div>
         <div id="parte1">
-            <input id="Valor1" value="0.9876">A1<br>
-            <input id="Valor2" value="0.987654">B1<br>
-            <input id="Play" value="Play" type="button" onclick="play()">
+            <input id="Valor1" value="0.9876" style="position: relative; margin-left: 490px"> X
+            <input id="Valor2" value="0.987654"> Y</br></br>
+	    <input id="Valor3" value="100" style="position: relative; margin-left: 585px"> ms</br></br>
+            <input id="Play" value="Play" type="button" style="position: relative; margin-left: 650px" onclick="play()">
         </div>
-        <div id='jxgbox' class='jxgbox' style='width:1000px; height:1000px;'></div>
+        <div id='jxgbox' class='jxgbox' style='width:1000px; height:1000px; margin-left: 160px'></div>
         <script>
             
             var graph1;
             var brd = JXG.JSXGraph.initBoard('jxgbox', { boundingbox: [-1, 1.05, 105, 0], axis: true });
             
-            var i, x1, y1;
+            var i, x1, y1, h, m;
             y1 = h;
             var p;
             var points = [];
@@ -42,16 +48,13 @@
                 
                 var a1 = document.getElementById("Valor1").value;
                 var b1 = document.getElementById("Valor2").value;
+		        m = document.getElementById("Valor3").value;
                 iterada(a1, '#0000ff', b1, '#ff0000');
-                //var b1 = document.getElementById("Valor2").value;
-                //iterada(b1, '#ff0000');                
                 
             }
             
             function iterada(h,f,g,k){
                 var i, x1, y1, y2;
-               // y1 = h;
-                //p;
                 points = [];
                 x = [];
                 y = [];
@@ -61,8 +64,6 @@
                 Y3 = [];
                 X4 = [];
                 Y4 = [];
-                //start = 0;
-                //end = 100;
                 i = 0;
                 y1 = h;
                 y2 = g;
@@ -135,7 +136,7 @@
         
                     if(x1>100){clearInterval(t);}
                     x1++;
-                },100);
+                },m);
                 
             }
             
