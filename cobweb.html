@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Cobweb bruto</title>
+        <title>Cobweb</title>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.96/jsxgraphcore.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div id="Botoes">
-            <input id="A1" value="0.7637">X1
-            <input id="A2" value="4">a
-            <input id="Play" type="button" value="Play" onclick="play()"/>
-            <input type="reset" value="Reset">
+        <div id="Titulo" style=" position: relative; margin-left: 650px">
+            <h1>Cobweb</h1>	    
         </div>
-        <div id='jxgbox' class='jxgbox' style='width:600px; height:600px;'></div>
+	<div id="Formula" style=" position: relative; margin-left: 625px">
+	    <h3>Xn+1 = aXn(1 - Xn)</h3>
+	</div>
+        <div id="Botoes" >
+            <input id="A1" value="0.7637"style="position: relative; margin-left: 500px"> X1
+            <input id="A2" value="4"> a</br></br>
+	    <input id="A3" value="100"style="position: relative; margin-left: 500px"> ms
+	    <input id="A4" value="100"> iteradas</br></br>
+            <input id="Play" type="button" style="position: relative; margin-left: 665px" value="Play" onclick="play()"/>
+        </div>
+        <div id='jxgbox' class='jxgbox' style='width:600px; height:600px; margin-left: 380px'></div>
         <script>
             
             var graph1;
@@ -32,6 +39,8 @@
             var start = 0;
             var end = 1;
             var h = document.getElementById('A2').value;
+	        var k = document.getElementById('A3').value;
+	        var l = document.getElementById('A4').value;
             var u;
             
             grafParabola(); 
@@ -43,6 +52,8 @@
                 brd = JXG.JSXGraph.initBoard('jxgbox', { boundingbox: [-0.1, 1.05, 1.05, -0.1], axis: true });
                 
                 h = document.getElementById('A2').value;
+		        k = document.getElementById('A3').value;
+		        l = document.getElementById('A4').value;
                 X3 = [];Y3 = [];Y2 = [];X2 = [];Y1 = [];X1 = []; X4 = [];Y4 = [];
                 
                 grafParabola();
@@ -64,9 +75,6 @@
                 X3.push(x3);
                 Y3.push(y3);
                 
-                //X4.push(x3);
-                //Y4.push(y3);
-                
                 var j = 0;
                 u = 0;
                 var t = setInterval(function(){
@@ -76,9 +84,9 @@
                     Desenha1();
                     u++;
                     j++;
-                    if(j>100){clearInterval(t);}
+                    if(j>l){clearInterval(t);}
                     
-                },150);
+                },k);
                    //alert(X4[2]);            
             }
             
@@ -220,13 +228,6 @@
             
             }
             
-            //function sleep(){
-              //  setTimeout(function(){return;},800);
-                //sleep();
-            //}
-            
-            
         </script>
     </body>
 </html>
-
