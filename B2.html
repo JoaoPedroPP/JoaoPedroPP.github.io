@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bifurcacao</title>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.96/jsxgraphcore.js"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="Titulo" style=" position: relative; margin-left: 395px">
+            <h1>Diagrama da Bifurcacao de 3 a 4</h1>	    
+        </div>
+        <div id='jxgbox' class='jxgbox' style='width:800px; height:600px; margin-left: 215px'></div>
+        <script>
+            
+            var brd = JXG.JSXGraph.initBoard('jxgbox', { boundingbox: [2.9, 1.05, 4.1, -0.1], axis: true });
+            var i, x, y, z, j, a, p, t;
+            var X1 = [];
+            var Y1 = [];
+            var point = [];
+            
+            
+		t=0;
+		while (t<3){
+                
+                
+                
+                
+                
+               
+                
+                
+                
+                
+                for(var b = 0; b<=2; b++){
+                    a = 2.95;
+                while(a <= 4){
+                    
+                    //a = i;
+                    x = Math.random();
+                    
+                    
+                        y = x;
+                        
+                        
+                        for(i = 0; i<=10000; i++){
+                            y = a*y*(1-y);
+                            Y1[i] = y;
+                        }
+                        
+                        i = 5000;
+                        
+                        if(i<=10000){
+                            z = Y1[i];
+                            //y = x;
+                            p = brd.createElement('point',[a, z],
+                                {
+                                    strokeWidth: 0.0001, strokeColor: '#ffffff',
+                                    highlightStrokeColor: '#0000ff', fillColor: '#0000ff',
+                                    highlightFillColor: '#0000ff', style: '6', size: 0.5, name:'', fixed: true
+                                }
+                            );
+                                                    
+                        
+                            i++;
+                            
+                           
+                        }
+                         point.push(p);
+                        
+                       
+                    
+                    
+                    a = a + 0.0005;
+                    //confirm('Impeça as caixas adicionais aparecerem novamente');
+                }
+                }
+        t++;
+            }
+            
+        </script>
+    </body>
+</html>
